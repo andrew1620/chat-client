@@ -1,0 +1,12 @@
+.roomLink:hover {
+  text-decoration: none;
+  color: #4269a7;
+}
+.room {
+  border-top: 1px solid #e7e8ec;
+  /* border-bottom: 1px solid #e7e8ec; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+}

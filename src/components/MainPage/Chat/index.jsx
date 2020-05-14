@@ -10,7 +10,6 @@ const Chat = ({
   match,
   joinRoom,
   sendMessage,
-  roomId: roomId2,
   requireMessage,
   messages,
   leaveRoom,
@@ -32,16 +31,15 @@ const Chat = ({
     requireMessage();
     return () => removeRequireMessage();
   }, []);
-  console.log("FROOOOOOOOOOM --- ", roomId, "rooms --- ", rooms);
+
   const currentRoom =
     rooms.length !== 0 ? rooms.find((room) => room.id === +roomId) : { participants: [] };
-  console.log(typeof roomId, "currentRoom --- ", currentRoom);
 
   return (
     <div className={css.chat}>
-      <Header roomId={roomId2} leaveRoom={leaveRoom} currentRoom={currentRoom} />
+      <Header currentRoom={currentRoom} />
       <Content messages={messages} />
-      <Footer roomId={roomId2} sendMessage={sendMessage} />
+      <Footer sendMessage={sendMessage} />
     </div>
   );
 };

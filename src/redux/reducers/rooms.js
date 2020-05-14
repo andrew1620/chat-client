@@ -1,9 +1,12 @@
+import { reset } from "redux-form";
+
 import socket from "../../socket";
 
 const SET_ROOMS = "rooms/SET_ROOMS";
 const SET_ROOM_ID = "rooms/SET_ROOM_ID";
 const MESSAGE_ADDED = "rooms/MESSAGE_ADDED";
 const SET_MESSAGES = "rooms/SET_MESSAGES";
+const RESET_STATE = "rooms/RESET_STATE";
 
 const initialState = {
   rooms: [],
@@ -21,6 +24,8 @@ const rooms = (state = initialState, action) => {
       return { ...state, messages: [...action.payload.messages] };
     case MESSAGE_ADDED:
       return { ...state, messages: [...state.messages, action.payload.newMessage] };
+    case RESET_STATE:
+      return { ...state, rooms: [], roomId: null, messages: [] };
     default:
       return state;
   }
@@ -35,6 +40,8 @@ const setRoomId = (roomId) => ({ type: SET_ROOM_ID, payload: { roomId } });
 const setMessages = (messages) => ({ type: SET_MESSAGES, payload: { messages } });
 
 const addNewMessage = (newMessage) => ({ type: MESSAGE_ADDED, payload: { newMessage } });
+
+export const resetRoomsState = () => ({ type: RESET_STATE });
 
 let requireRoomsCB;
 export const requireRooms = () => (dispatch) => {
@@ -94,7 +101,7 @@ export const leaveRoom = () => (dispatch) => {
 export const sendMessage = (message) => (dispatch) => {
   try {
     socket.emit("ROOM:SEND_MESSAGE", { message }, (data) => {
-      if (data.resultCode === 0) console.log("Added message --- ", data);
+      if (data.resultCode === 0) dispatch(reset("sendMessageForm"));
       else
         console.log(
           "Возникла ошибка на сервере во время отправки сообщения в комнату: ",

@@ -1,0 +1,43 @@
+.roomsBox {
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.rooms {
+  overflow: auto;
+}
+.btnAddRoom {
+  border: none;
+  outline: none;
+  background: url("../../../assets/img/addRoom.svg") no-repeat center/30px;
+  min-height: 40px;
+  opacity: 0.7;
+}
+.btnAddRoom:hover {
+  opacity: 1;
+}
+.btnAddRoom:focus {
+  outline: none;
+}
+
+.rooms::-webkit-scrollbar-track {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.rooms::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background-color: #b2b2bb63;
+}
+
+.rooms::-webkit-scrollbar-thumb:hover {
+  background-color: #c4c4c4;
+}
+
+.rooms::-webkit-scrollbar {
+  width: 5px;
+}
+.rooms::-webkit-scrollbar-corner {
+  background-color: transparent;
+}

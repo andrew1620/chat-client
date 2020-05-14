@@ -2,8 +2,9 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 import css from "./style.module.css";
+import { isRequired } from "../../../../Utils/validators";
 
-const Footer = ({ roomId, sendMessage }) => {
+const Footer = ({ sendMessage }) => {
   const handleSubmit = (formData) => {
     sendMessage({ time: new Date().toLocaleTimeString(), message: formData.newMessage });
   };
@@ -25,8 +26,9 @@ let SendMessageForm = ({ handleSubmit }) => {
         name="newMessage"
         placeholder="Напишите сообщение"
         className={css.textarea}
+        validate={[isRequired]}
       />
-      <button className="btn btn-primary">Отправить</button>
+      <button className={css.btnSend}></button>
     </form>
   );
 };

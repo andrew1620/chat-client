@@ -19,7 +19,8 @@ const JoinChat = () => {
   if (userId) return <Redirect to="/main" />;
 
   return (
-    <div className={css.joinChatWrapper}>
+    <div className={css.joinChat}>
+      <h2>Вход в чат</h2>
       <JoinChatForm onSubmit={authorize} />
       <MainPage />
     </div>

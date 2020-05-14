@@ -1,23 +1,23 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 
-let JoinChatForm = ({ handleSubmit }) => {
+import css from "./style.module.css";
+import NameInput from "./NameInput";
+import { correctName } from "../../Utils/validators";
+
+let JoinChatForm = ({ handleSubmit, error }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <Field
-          id="userName"
-          className="form-control"
-          aria-describedby="nameHelp"
-          component="input"
-          name="userName"
-          placeholder="Введите имя"
-        />
-        <small id="userName" className="form-text text-muted">
-          Имя должно быть латинскими буквами и не начинаться с цифр
-        </small>
-      </div>
-      <button type="submit" className="btn btn-primary">
+      <Field
+        id="userName"
+        className={css.nameField}
+        component={NameInput}
+        name="userName"
+        placeholder="Введите имя"
+        validate={[correctName]}
+      />
+      {error && <div className={css.loginError}>{error}</div>}
+      <button type="submit" className={css.btnLogin}>
         Войти
       </button>
     </form>

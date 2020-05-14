@@ -1,0 +1,7 @@
+.mainPage {
+  background: #fff;
+  max-width: inherit;
+  max-height: 100vh;
+  border: 1px solid #e3e4e8;
+  border-radius: 3px;
+}

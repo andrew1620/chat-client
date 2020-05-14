@@ -1,4 +1,7 @@
-.app {
+.appWrapper {
   width: 60%;
   margin: 0 auto;
+  max-width: 60%;
+  height: 100vh;
+  max-height: 100vh;
 }

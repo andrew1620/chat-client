@@ -2,5 +2,6 @@
   display: flex;
   flex-direction: column;
   max-height: 100vh;
+  max-width: inherit;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }

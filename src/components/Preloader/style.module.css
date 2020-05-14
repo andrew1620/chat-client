@@ -1,0 +1,13 @@
+.preloader {
+  width: 100%;
+  height: inherit;
+  display: flex;
+}
+.preloader div {
+  margin: auto;
+}
+.loader {
+  width: 100px;
+  height: 10px;
+  background: url("../../assets/img/prealoder.gif") no-repeat center/100px 10px;
+}

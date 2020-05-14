@@ -13,8 +13,10 @@ import {
   removeRequireMessage,
   removeRequireRooms,
 } from "../../redux/reducers/rooms";
-import { getMessages } from "../../redux/reducers/roomsSelectors";
+import { getMessages, getRooms } from "../../redux/reducers/roomsSelectors";
 import Chat from "./Chat";
+import { getUserId } from "../../redux/reducers/userSelectors";
+import css from "./style.module.css";
 
 const MainPage = ({
   userId,
@@ -23,7 +25,6 @@ const MainPage = ({
   createRoom,
   joinRoom,
   sendMessage,
-  roomId,
   requireMessage,
   messages,
   leaveRoom,
@@ -42,7 +43,7 @@ const MainPage = ({
   if (!userId) return <Redirect to="/login" />;
 
   return (
-    <div>
+    <div className={css.mainPage}>
       <Route exact path="/main" render={() => <Rooms rooms={rooms} createRoom={createRoom} />} />
       <Route
         path="/main/:roomId"
@@ -50,7 +51,6 @@ const MainPage = ({
           <Chat
             joinRoom={joinRoom}
             sendMessage={sendMessage}
-            roomId={roomId}
             requireMessage={requireMessage}
             messages={messages}
             leaveRoom={leaveRoom}
@@ -65,9 +65,8 @@ const MainPage = ({
 
 const mstp = (state) => {
   return {
-    userId: state.userData.id,
-    rooms: state.roomsData.rooms,
-    roomId: state.roomsData.roomId,
+    userId: getUserId(state),
+    rooms: getRooms(state),
     messages: getMessages(state),
   };
 };
