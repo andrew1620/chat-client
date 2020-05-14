@@ -13,6 +13,9 @@ const JoinChat = () => {
     dispatch(authorizeUser(formData.userName));
   };
   const userId = useSelector((state) => state.userData.id);
+  const inviteRoomId = useSelector((state) => state.userData.inviteRoomId);
+
+  if (userId && inviteRoomId) return <Redirect to={`/main/${inviteRoomId}`} />;
   if (userId) return <Redirect to="/main" />;
 
   return (

@@ -11,6 +11,7 @@ import {
   requireMessage,
   leaveRoom,
   removeRequireMessage,
+  removeRequireRooms,
 } from "../../redux/reducers/rooms";
 import { getMessages } from "../../redux/reducers/roomsSelectors";
 import Chat from "./Chat";
@@ -27,9 +28,15 @@ const MainPage = ({
   messages,
   leaveRoom,
   removeRequireMessage,
+  removeRequireRooms,
 }) => {
   useEffect(() => {
+    console.log("Сработал require rooms");
     if (userId) requireRooms();
+    return () => {
+      console.log("Сработало удаление require rooms");
+      if (userId) removeRequireRooms();
+    };
   }, [userId]);
 
   if (!userId) return <Redirect to="/login" />;
@@ -48,6 +55,7 @@ const MainPage = ({
             messages={messages}
             leaveRoom={leaveRoom}
             removeRequireMessage={removeRequireMessage}
+            rooms={rooms}
           />
         )}
       />
@@ -71,5 +79,6 @@ const mdtp = {
   requireMessage,
   leaveRoom,
   removeRequireMessage,
+  removeRequireRooms,
 };
 export default connect(mstp, mdtp)(MainPage);

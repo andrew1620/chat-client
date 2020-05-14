@@ -1,0 +1,12 @@
+.participantsBox {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.participant {
+  font-size: 14px;
+  color: rgb(85, 85, 85);
+  margin-top: 5px;
+  margin-right: 5px;
+}

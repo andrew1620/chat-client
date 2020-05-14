@@ -36,17 +36,23 @@ const setMessages = (messages) => ({ type: SET_MESSAGES, payload: { messages } }
 
 const addNewMessage = (newMessage) => ({ type: MESSAGE_ADDED, payload: { newMessage } });
 
+let requireRoomsCB;
 export const requireRooms = () => (dispatch) => {
+  requireRoomsCB = (data) => {
+    console.log("roomAdded --- ", data);
+    if (data.resultCode === 0) {
+      dispatch(setRooms(data.data.rooms));
+    } else console.log("Возникла ошибка на сервере во время получения комнат: ", data.message);
+  };
   try {
-    socket.on("ROOM:ADDED", (data) => {
-      console.log("roomAdded --- ", data);
-      if (data.resultCode === 0) {
-        dispatch(setRooms(data.data.rooms));
-      } else console.log("Возникла ошибка на сервере во время получения комнат: ", data.message);
-    });
+    socket.on("ROOM:ADDED", requireRoomsCB);
   } catch (err) {
     console.log("Произошла ошибка при попытке получения комнат: ", err);
   }
+};
+export const removeRequireRooms = () => (dispatch) => {
+  console.log("Сработало удаление requireRooms");
+  socket.removeListener("ROOM:MESSAGE_ADDED", requireMessageCB);
 };
 
 export const createRoom = () => (dispatch) => {
@@ -123,4 +129,11 @@ export const requireMessage = () => (dispatch) => {
 export const removeRequireMessage = () => (dispatch) => {
   console.log("Сработало удаление прослушивателя -- ", requireMessageCB);
   socket.removeListener("ROOM:MESSAGE_ADDED", requireMessageCB);
+};
+
+export const disconnectSocket = (roomId) => (dispatch) => {
+  console.log("Отключились от сокета");
+  socket.emit("USERS:DISCONNECT", { roomId }, (data) => {
+    console.log(data.message);
+  });
 };
