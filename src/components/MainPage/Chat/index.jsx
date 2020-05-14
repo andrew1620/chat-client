@@ -24,7 +24,7 @@ const Chat = ({
     joinRoom(roomId);
     return () => {
       console.log("выход из комнаты", +roomId);
-      leaveRoom(+roomId);
+      leaveRoom();
     };
   }, []);
 

@@ -52,7 +52,7 @@ export const requireRooms = () => (dispatch) => {
 };
 export const removeRequireRooms = () => (dispatch) => {
   console.log("Сработало удаление requireRooms");
-  socket.removeListener("ROOM:MESSAGE_ADDED", requireMessageCB);
+  socket.removeListener("ROOM:ADDED", requireMessageCB);
 };
 
 export const createRoom = () => (dispatch) => {
@@ -75,16 +75,15 @@ export const joinRoom = (roomId) => (dispatch) => {
         dispatch(setMessages(data.data.messages));
       } else
         console.log("Возникла ошибка на сервере во время подключения к комнате: ", data.message);
-      console.log("join room --- ", data);
     });
   } catch (err) {
     console.log("Произошла ошибка при попытке подключения к комнате: ", err);
   }
 };
 
-export const leaveRoom = (roomId) => (dispatch) => {
+export const leaveRoom = () => (dispatch) => {
   try {
-    socket.emit("ROOM:LEAVE", { roomId }, (data) => {
+    socket.emit("ROOM:LEAVE", null, (data) => {
       console.log("from leaving room --- ", data);
     });
   } catch (err) {
@@ -92,11 +91,9 @@ export const leaveRoom = (roomId) => (dispatch) => {
   }
 };
 
-export const sendMessage = (roomId, message) => (dispatch) => {
-  console.log(roomId, message);
-
+export const sendMessage = (message) => (dispatch) => {
   try {
-    socket.emit("ROOM:SEND_MESSAGE", { roomId, message }, (data) => {
+    socket.emit("ROOM:SEND_MESSAGE", { message }, (data) => {
       if (data.resultCode === 0) console.log("Added message --- ", data);
       else
         console.log(
@@ -129,11 +126,4 @@ export const requireMessage = () => (dispatch) => {
 export const removeRequireMessage = () => (dispatch) => {
   console.log("Сработало удаление прослушивателя -- ", requireMessageCB);
   socket.removeListener("ROOM:MESSAGE_ADDED", requireMessageCB);
-};
-
-export const disconnectSocket = (roomId) => (dispatch) => {
-  console.log("Отключились от сокета");
-  socket.emit("USERS:DISCONNECT", { roomId }, (data) => {
-    console.log(data.message);
-  });
 };

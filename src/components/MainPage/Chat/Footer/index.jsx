@@ -5,7 +5,7 @@ import css from "./style.module.css";
 
 const Footer = ({ roomId, sendMessage }) => {
   const handleSubmit = (formData) => {
-    sendMessage(roomId, { time: new Date().toLocaleTimeString(), message: formData.newMessage });
+    sendMessage({ time: new Date().toLocaleTimeString(), message: formData.newMessage });
   };
 
   return (
