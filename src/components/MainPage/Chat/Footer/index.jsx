@@ -31,6 +31,7 @@ let SendMessageForm = ({ handleSubmit }) => {
         placeholder="Напишите сообщение"
         className={css.textarea}
         validate={[isRequired]}
+        focused
       />
       <button className={css.btnSend}></button>
     </form>

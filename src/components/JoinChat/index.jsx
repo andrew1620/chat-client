@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { authorizeUser } from "../../redux/reducers/user";
 import JoinChatForm from "./JoinChatForm";
 import css from "./style.module.css";
-import MainPage from "../MainPage";
 import { Redirect } from "react-router-dom";
 
 const JoinChat = () => {
@@ -28,7 +27,6 @@ const JoinChat = () => {
     <div className={css.joinChat}>
       <h2>Вход в чат</h2>
       <JoinChatForm onSubmit={authorize} />
-      <MainPage />
     </div>
   );
 };
