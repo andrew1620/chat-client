@@ -5,8 +5,6 @@ import css from "./style.module.css";
 import UsersOnline from "./UsersOnline";
 
 const Header = ({ currentRoom }) => {
-  console.log(document.location);
-
   return (
     <div className={css.header}>
       <div className={css.headerLinks}>
@@ -15,12 +13,15 @@ const Header = ({ currentRoom }) => {
         </NavLink>
         <span className={css.title}> Комната {currentRoom.id}</span>
 
-        <input
-          type="text"
-          disabled
-          value={`${document.location.origin}/invitation/${currentRoom.id}`}
-          className={css.inviteRef}
-        />
+        <div className={css.inviteRefBox}>
+          <input
+            type="text"
+            disabled
+            value={`${document.location.origin}/invitation/${currentRoom.id}`}
+            className={css.inviteRef}
+          />
+          <span className={css.toolTip}>Для приглашения пользователя отправьте эту ссылку</span>
+        </div>
       </div>
       <UsersOnline currentRoom={currentRoom} />
     </div>

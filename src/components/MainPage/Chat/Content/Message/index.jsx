@@ -3,7 +3,6 @@ import React from "react";
 import css from "./style.module.css";
 
 const Message = ({ message }) => {
-  // console.log("from message ", message);
   return (
     <div className={css.message}>
       <div className={css.info}>

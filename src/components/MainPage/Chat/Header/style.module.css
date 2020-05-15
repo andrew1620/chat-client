@@ -2,7 +2,6 @@
   border-bottom: 1px solid #eee;
 }
 .headerLinks {
-  /* border-bottom: 1px solid #eee; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,4 +21,24 @@
   border-radius: 5px;
   outline: none;
   border: none;
+}
+.inviteRefBox {
+  position: relative;
+}
+.inviteRef:hover + .toolTip {
+  opacity: 1;
+}
+.toolTip {
+  background: #dbdbdb;
+  font-size: 12px;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  color: #000;
+  width: 200px;
+  padding: 5px;
+  border-radius: 7px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
 }

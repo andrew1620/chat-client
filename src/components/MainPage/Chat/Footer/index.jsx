@@ -5,8 +5,12 @@ import css from "./style.module.css";
 import { isRequired } from "../../../../Utils/validators";
 
 const Footer = ({ sendMessage }) => {
+  // Ф-ия срабатывания submit в форме отправки сообщения
   const handleSubmit = (formData) => {
-    sendMessage({ time: new Date().toLocaleTimeString(), message: formData.newMessage });
+    sendMessage({
+      time: new Date().toLocaleString(),
+      message: formData.newMessage,
+    });
   };
 
   return (

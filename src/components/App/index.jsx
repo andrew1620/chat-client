@@ -16,7 +16,6 @@ function App() {
 
   if (!isConnected) {
     dispatch(checkConnection());
-    console.log("ОБНОВИЛСЯ ЭПП");
   }
 
   return (

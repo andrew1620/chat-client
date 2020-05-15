@@ -31,15 +31,15 @@ const MainPage = ({
   removeRequireMessage,
   removeRequireRooms,
 }) => {
+  // Подписка на обновления комнат и отписка от них при размонтировании
   useEffect(() => {
-    console.log("Сработал require rooms");
     if (userId) requireRooms();
     return () => {
-      console.log("Сработало удаление require rooms");
       if (userId) removeRequireRooms();
     };
   }, [userId]);
 
+  // Если нет айди пользователя, редиректим на страницу длгина
   if (!userId) return <Redirect to="/login" />;
 
   return (

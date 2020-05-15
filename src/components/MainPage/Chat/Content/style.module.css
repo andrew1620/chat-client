@@ -23,3 +23,7 @@
 .content::-webkit-scrollbar-corner {
   background-color: transparent;
 }
+.noMessages {
+  padding: 5px 10px;
+  font-size: 14px;
+}

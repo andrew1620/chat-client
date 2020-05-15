@@ -16,22 +16,24 @@ const Chat = ({
   removeRequireMessage,
   rooms,
 }) => {
+  // Получаем айди комнаты, к которой необходимо подключиться
   const roomId = match.params.roomId;
 
+  // Подключаемся к комнате и при размонтировании отключаемся от нее
   useEffect(() => {
-    console.log("подлючение к комнате");
     joinRoom(roomId);
     return () => {
-      console.log("выход из комнаты", +roomId);
       leaveRoom();
     };
   }, []);
 
+  // Подписываемся на новые сообщения, и отписываемся
   useEffect(() => {
     requireMessage();
     return () => removeRequireMessage();
   }, []);
 
+  // Получаем нужную комнату из массива
   const currentRoom =
     rooms.length !== 0 ? rooms.find((room) => room.id === +roomId) : { participants: [] };
 
